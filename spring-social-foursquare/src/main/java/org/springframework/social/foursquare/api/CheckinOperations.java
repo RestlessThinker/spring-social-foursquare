@@ -52,5 +52,21 @@ public interface CheckinOperations {
 	 */
 	Checkin deleteComment(String checkinId, String commentId);
 	
+	/**
+	 * This endpoint is part of the Apps Platform. Reply to a user about a check-in. 
+	 * This reply will only be visible to the owner of the check-in. 
+	 * An application may only reply once per check-in.
+	 * @param checkinId
+	 * @param text
+	 * @param url		Link for more details. This page will be opened in an embedded 
+	 * web view in the foursquare application, unless contentId is specified and a native 
+	 * link handler is registered and present. We support the following URL 
+	 * schemes: http, https, foursquare, mailto, tel, and sms.
+	 * @param contentId	Identifier for the reply to be used in a native link, up to 
+	 * 50 characters. A url must also be specified in the request.
+	 * @return
+	 */
+	String reply(String checkinId, String text, String url, String contentId);
+	
 	public static final String CHECKINS_ENDPOINT = "checkins/";
 }

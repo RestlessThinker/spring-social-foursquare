@@ -77,4 +77,15 @@ public class CheckinTemplateTest extends AbstractFoursquareApiTest {
 		assertTrue(checkin != null);
 		mockServer.verify();
 	}
+	
+	@Test
+	public void reply() {
+	    	mockServer.expect(requestTo("https://api.foursquare.com/v2/checkins/CHECKIN_ID/reply?oauth_token=ACCESS_TOKEN&v=20110609"))
+	    		.andExpect(method(POST))
+	    		.andExpect(body("checkinId=CHECKIN_ID&text=text&url=http%3A%2F%2Ffoo.com&contentId"))
+	    		.andRespond(withResponse( "reply", responseHeaders));
+	    	String reply = foursquare.checkinOperations().reply( "CHECKIN_ID", "text", "http://foo.com", null );
+	    	assertTrue( reply.equalsIgnoreCase( "reply" ));
+	    	mockServer.verify();
+	}
 }

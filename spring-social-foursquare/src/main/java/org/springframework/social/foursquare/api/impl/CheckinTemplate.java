@@ -65,5 +65,15 @@ public class CheckinTemplate extends AbstractFoursquareOperations implements Che
 		params.add("commentId", commentId);
 		return post(buildUri(CHECKINS_ENDPOINT + checkinId + "/deletecomment"), params, CheckinContainer.class).getCheckin();
 	}
+	
+	public String reply(String checkinId, String text, String url, String contentId) {
+	    	requireUserAuthorization();
+	    	MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
+	    	params.add("checkinId", checkinId);
+	    	params.add("text", text);
+	    	params.add("url", url);
+	    	params.add("contentId", contentId);
+	    	return post(buildUri(CHECKINS_ENDPOINT + checkinId + "/reply"), params, String.class);
+	}
 
 }
